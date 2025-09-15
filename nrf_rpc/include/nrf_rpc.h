@@ -12,9 +12,10 @@
 #include <stddef.h>
 
 #include <nrf_rpc_errno.h>
-#include <nrf_rpc_common.h>
 #include <nrf_rpc_tr.h>
+#include <nrf_rpc_common.h>
 #include <nrf_rpc_os.h>
+#include <nrf_rpc_auto_arr.h>
 
 /**
  * @defgroup nrf_rpc nRF RPC (Remote Procedure Calls) module.
@@ -221,9 +222,9 @@ struct nrf_rpc_cleanup_handler
 					_ack_data, _err_handler, _bound_handler,  \
 					_wait_on_init, _initiator)	          \
 	NRF_RPC_AUTO_ARR(NRF_RPC_CONCAT(_name, _cmd_array),		          \
-			 "cmd_" NRF_RPC_STRINGIFY(_name));		          \
+			 NRF_RPC_CONCAT(cmd_, _name));			          \
 	NRF_RPC_AUTO_ARR(NRF_RPC_CONCAT(_name, _evt_array),		          \
-			 "evt_" NRF_RPC_STRINGIFY(_name));		          \
+			 NRF_RPC_CONCAT(evt_, _name));			          \
 										  \
 	static struct nrf_rpc_group_data NRF_RPC_CONCAT(_name, _group_data) = {   \
 		.src_group_id = NRF_RPC_ID_UNKNOWN,                               \
@@ -231,7 +232,7 @@ struct nrf_rpc_cleanup_handler
 		.transport_initialized = false,					  \
 	};                                                                        \
 										  \
-	NRF_RPC_AUTO_ARR_ITEM(const struct nrf_rpc_group, _name, "grp",		      \
+	NRF_RPC_AUTO_ARR_ITEM(const struct nrf_rpc_group, _name, grp,		      \
 			      _strid) = {					      \
 		.cmd_array = &NRF_RPC_CONCAT(_name, _cmd_array),		      \
 		.evt_array = &NRF_RPC_CONCAT(_name, _evt_array),		      \
@@ -325,7 +326,7 @@ struct nrf_rpc_cleanup_handler
 	NRF_RPC_STATIC_ASSERT(_cmd <= 0xFE, "Command out of range");	       \
 	NRF_RPC_AUTO_ARR_ITEM(const struct _nrf_rpc_decoder,		       \
 			      NRF_RPC_CONCAT(_name, _cmd_dec),		       \
-			      "cmd_" NRF_RPC_STRINGIFY(_group),		       \
+			      NRF_RPC_CONCAT(cmd_, _group),		       \
 			      NRF_RPC_STRINGIFY(_name)) = {		       \
 		.id = _cmd,						       \
 		.handler = _handler,					       \

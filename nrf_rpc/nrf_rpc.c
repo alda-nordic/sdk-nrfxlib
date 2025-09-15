@@ -144,7 +144,7 @@ static struct nrf_rpc_os_mutex cleanup_mutex;
 static struct nrf_rpc_cleanup_handler *cleanup_handlers;
 
 /* Array with all defiend groups */
-NRF_RPC_AUTO_ARR(nrf_rpc_groups_array, "grp");
+NRF_RPC_AUTO_ARR(nrf_rpc_groups_array, grp);
 
 /* Check the nRF RPC protocol version. */
 NRF_RPC_STATIC_ASSERT(NRF_RPC_PROTOCOL_VERSION <= NRF_RPC_MAXIMUM_PROTOCOL_VERSION,
