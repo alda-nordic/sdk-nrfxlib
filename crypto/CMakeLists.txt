@@ -14,6 +14,10 @@ add_library(nrfxlib_crypto INTERFACE)
 
 if(CONFIG_NRF_OBERON OR CONFIG_BUILD_WITH_TFM OR CONFIG_PSA_CRYPTO_DRIVER_OBERON)
 
+  if ("${ZEPHYR_TOOLCHAIN_VARIANT}" STREQUAL "appleclang")
+    message(FATAL_ERROR "Oberon not supported with Apple clang toolchain")
+  endif()
+
   set(OBERON_BASE ${CMAKE_CURRENT_SOURCE_DIR}/nrf_oberon)
   set(OBERON_VER 3.0.20)
 
