@@ -18,8 +18,9 @@ zephyr_linker_section(
   NOINPUT
 )
 zephyr_linker_section_configure(
-  SECTION nrf_rpc_grp
+  SECTION nrf_rpc
   KEEP
   SORT NAME
-  INPUT "_nrf_rpc_grp**"
+  INPUT "nrf_rpc"
+        "nrf_rpc_grp**"
 )

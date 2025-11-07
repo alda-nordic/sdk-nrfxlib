@@ -20,6 +20,12 @@ extern "C" {
  *
  * @brief Auto array utility macros used in nRF RPC.
  */
+#ifndef __in_section
+#define ___in_section(a, b, c) \
+	__attribute__((section(NRF_RPC_STRINGIFY(a)                            \
+	                       NRF_RPC_STRINGIFY(b)                            \
+			       NRF_RPC_STRINGIFY(c))))
+#endif
 
 /** @brief Default @ref NRF_RPC_AUTO_ARR implementation.
  *
@@ -29,9 +35,9 @@ extern "C" {
 #ifndef NRF_RPC_OS_AUTO_ARR
 #define NRF_RPC_OS_AUTO_ARR(_name, _array_key)				       \
 	const uint8_t NRF_RPC_CONCAT(_name, _auto_arr_end) __used	       \
-	__attribute__((__section__(".nrf_rpc." _array_key ".c.")));	       \
+	__in_section(NRF_RPC_CONCAT(nrf_rpc_, _array_key), , c);	       \
 	const uint8_t *const _name __used				       \
-	__attribute__((__section__(".nrf_rpc." _array_key ".a."))) =	       \
+	__in_section(NRF_RPC_CONCAT(nrf_rpc_, _array_key), , a) =	       \
 		&NRF_RPC_CONCAT(_name, _auto_arr_end)
 #endif
 
@@ -53,7 +59,7 @@ extern "C" {
 #ifndef NRF_RPC_OS_AUTO_ARR_ITEM
 #define NRF_RPC_OS_AUTO_ARR_ITEM(_type, _name, _array_key, _item_key)	       \
 	_type _name __used						       \
-	__attribute__((__section__(".nrf_rpc." _array_key ".b." _item_key)))
+	__in_section(NRF_RPC_CONCAT(nrf_rpc_, _array_key), , _b)
 #endif
 
 /** @brief Adds new variable to the array.
