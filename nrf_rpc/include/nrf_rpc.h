@@ -346,7 +346,7 @@ struct nrf_rpc_cleanup_handler
 	NRF_RPC_STATIC_ASSERT(_evt <= 0xFE, "Event out of range");	       \
 	NRF_RPC_AUTO_ARR_ITEM(const struct _nrf_rpc_decoder,		       \
 			       NRF_RPC_CONCAT(_name, _evt_dec),		       \
-			       "evt_" NRF_RPC_STRINGIFY(_group),	       \
+			       NRF_RPC_CONCAT(evt_, _group),	       \
 			       NRF_RPC_STRINGIFY(_name)) = {		       \
 		.id = _evt,						       \
 		.handler = _handler,					       \

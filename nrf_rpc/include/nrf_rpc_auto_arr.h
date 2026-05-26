@@ -59,7 +59,7 @@ extern "C" {
 #ifndef NRF_RPC_OS_AUTO_ARR_ITEM
 #define NRF_RPC_OS_AUTO_ARR_ITEM(_type, _name, _array_key, _item_key)	       \
 	_type _name __used						       \
-	__in_section(NRF_RPC_CONCAT(nrf_rpc_, _array_key), , _b)
+	__in_section(NRF_RPC_CONCAT(nrf_rpc_, _array_key), , b)
 #endif
 
 /** @brief Adds new variable to the array.
