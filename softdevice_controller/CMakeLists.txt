@@ -28,6 +28,8 @@ if(CONFIG_BT_LL_SOFTDEVICE AND CONFIG_BT_LL_SOFTDEVICE_BUILD_TYPE_LIB)
   set(SOFTDEVICE_CONTROLLER_LIB
     ${SOFTDEVICE_CONTROLLER_LIB_DIR}/libsoftdevice_controller_${softdevice_controller_variant}.a)
 
+  message(WARNING "Trying to find lib at '${SOFTDEVICE_CONTROLLER_LIB}'")
+
   if(NOT EXISTS ${SOFTDEVICE_CONTROLLER_LIB})
     message(FATAL_ERROR "This combination of SoC and floating point ABI is not"
       "supported by the SoftDevice Controller lib.")
